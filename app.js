@@ -6,8 +6,7 @@ const express = require('express');
 const app = express();
 
 app.use(express.static('public'));  // midware, move scripts and styles folder to the public folder
-
-app.use(express)
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
     res.send('<h1>Hello World!</h1>');
@@ -38,12 +37,14 @@ app.post('/recommend', function (req, res) {
     const filePath = path.join(__dirname, 'data', 'restaurants.json');
 
     const fileData = fs.readFileSync(filePath);
-    const storeRestaurants = JSON.parse(fileData);
+    const storedRestaurants = JSON.parse(fileData);
 
-    fs.writeFileSync(filePath, JSON.stringify(storeRestaurants));
+    storedRestaurants.push(restaurant);
+
+    fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
 
     res.redirect('/confirm');
-})
+});
 
 app.get('/index', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'index.html');
