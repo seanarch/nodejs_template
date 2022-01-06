@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 
 const express = require('express');
@@ -5,6 +6,8 @@ const express = require('express');
 const app = express();
 
 app.use(express.static('public'));  // midware, move scripts and styles folder to the public folder
+
+app.use(express)
 
 app.get('/', function (req, res) {
     res.send('<h1>Hello World!</h1>');
@@ -30,9 +33,23 @@ app.get('/recommend', function (req, res) {
     res.sendFile(htmlFilePath);
 })
 
+app.post('/recommend', function (req, res) {
+    const restaurant = req.body;
+    const filePath = path.join(__dirname, 'data', 'restaurants.json');
+
+    const fileData = fs.readFileSync(filePath);
+    const storeRestaurants = JSON.parse(fileData);
+
+    fs.writeFileSync(filePath, JSON.stringify(storeRestaurants));
+
+    res.redirect('/confirm');
+})
+
 app.get('/index', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'index.html');
     res.sendFile(htmlFilePath);
 })
+
+
 
 app.listen(3000);
