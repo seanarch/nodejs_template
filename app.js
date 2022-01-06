@@ -15,22 +15,22 @@ app.get('/', function (req, res) {
 app.get('/restaurants', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'restaurants.html');
     res.sendFile(htmlFilePath);
-})
+});
 
 app.get('/about', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'about.html');
     res.sendFile(htmlFilePath);
-})
+});
 
 app.get('/confirm', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'confirm.html');
     res.sendFile(htmlFilePath);
-})
+});
 
 app.get('/recommend', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'recommend.html');
     res.sendFile(htmlFilePath);
-})
+});
 
 app.post('/recommend', function (req, res) {
     const restaurant = req.body;
@@ -49,7 +49,7 @@ app.post('/recommend', function (req, res) {
 app.get('/index', function (req, res) {
     const htmlFilePath = path.join(__dirname, 'views', 'index.html');
     res.sendFile(htmlFilePath);
-})
+});
 
 
 
