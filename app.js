@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const express = require('express');
+const { get } = require('express/lib/response');
 
 const app = express();
 
@@ -24,6 +25,11 @@ app.get('/restaurants', function (req, res) {
         numberOfRestaurants: storedRestaurants.length,
         restaurants: storedRestaurants,
     });
+});
+
+app.get('/restaurants/:id', function (req, res) {
+    const restaurantId = req.params.id;
+    res.render('restaurant-detail', { rid: restaurantId })
 });
 
 app.get('/about', function (req, res) {
